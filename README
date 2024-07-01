@@ -1,1 +1,14 @@
-Workflow to Fulgent interview:
+Workflow for Fulgent interview:
+
+1. I start by looking for the hg38 aligned bam file from NA12878. 
+However, I can't find it so I check the file NA12878.alt_bwamem_GRCh38DH.20150826.CEU.exome.bam.bas to see what is available. 
+Turn out, there were many versions of exome sequencing from the same NA12878. 
+So, I check the file and download the fastq from SRR1518133 study which has the highest average_quality_of_mapped_bases.
+
+2. Then,I download hg38.fa reference file from UCSC genome browser, and recreate index for it using BWA
+3. Afterward, I aligned the fastq to hg38 reference genome using BWA mem
+4. After alignment, I performed standard quality steps for aligned bam file as explained in the sript.sh including read duplication marking and removal.
+5. Then, I chose CD4 gene as region of interest. the gene position is chr12:6772520-6839847. I create a tab delimited bybase.bed for that position.
+6. Finally, I use bedtools to calculate the coverage by base using the option -d. 
+
+Entire workflow and every command lines can be found in the script.sh
