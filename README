@@ -12,3 +12,4 @@ So, I check the file and download the fastq from SRR1518133 study which has the 
 6. Finally, I use bedtools coverage to calculate the coverage by base using the option -d. 
 
 Entire workflow and every command lines can be found in the script.sh
+Packages used: samtools, bwa, bedtools, picard
