@@ -1,13 +1,13 @@
 #!/bin/bash
-
+module load BWA
+module load samtools
+module load bedtools
 
 ###
-# Download .bas and chekc for study with highest quality read
+# Download .bas and check for study with highest quality read
+# This step is performed separatedly and manually outside of this script
 ###
-wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/data/CEU/NA12878/exome_alignment/NA12878.alt_bwamem_GRCh38DH.20150826.CEU.exome.bam.bas 
-
-
-
+#wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/data/CEU/NA12878/exome_alignment/NA12878.alt_bwamem_GRCh38DH.20150826.CEU.exome.bam.bas 
 
 ###
 # Download read from the SRR with highest read quality
@@ -26,7 +26,8 @@ bwa mem hg38.fa <(zcat SRR1518133_1.fastq.gz) | samtools view -bS - > out.bam
 
 ###
 # Remove unmapped reads,
-# not primary alignment reads, reads failing platform
+# not primary alignment reads, reads failing platform. 
+# The binary flag number for all of the above in samtools is 772
 # Obtain name sorted BAM file
 ###
 samtools view -F 772 -u out.bam > out.2.bam
