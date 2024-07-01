@@ -25,12 +25,11 @@ bwa index hg38.fa
 bwa mem hg38.fa <(zcat SRR1518133_1.fastq.gz) | samtools view -bS - > out.bam
 
 ###
-# Remove unmapped, mate unmapped
-# not primary alignment, reads failing platform
-# Only keep properly paired reads
+# Remove unmapped reads,
+# not primary alignment reads, reads failing platform
 # Obtain name sorted BAM file
 ###
-samtools view -F 524 -f 2 -u out.bam > out.2.bam
+samtools view -F 772 -u out.bam > out.2.bam
 samtools sort -n out.2.bam -o out.sorted.bam
 samtools index out.sorted.bam
 
