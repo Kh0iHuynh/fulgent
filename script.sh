@@ -44,10 +44,13 @@ java -jar picard_2_18_7.jar MarkDuplicates I=out.sorted.bam O=out.dedup.bam M=ou
 # create bed file for gene of interest CD4
 # CD4 locates in chr12:6772520-6839847
 ###
-for i in $(seq 6772520 6839847); do 
-  j= `expr $i + 2` 
-  echo "chr12 $i $j" >> bybase.txt
-; done
+echo "chr12 6772520 6839847" | sed 's/ /\t/g' > bybase.bed
+
+###
+# calculate per base coverage using bedtools
+###
+bedtools coverage -a bybase.bed -b out.dedup.bam -d
+
 
 
 
